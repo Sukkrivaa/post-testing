@@ -1,15 +1,21 @@
 import React from "react";
 import {mount} from "enzyme";
 import CommentBox from "components/CommentBox";
+import Root from "Root";
 //Could use the shallow render here - just using the main render for practice
-let wrapper;
+let wrapper; //JUST SOMETHING THAT LETS US ACCESS THE NODES (THE DIFFERENT ELEMENTS) TO FIND THEM OR INTERACT WITH THEM, IF POSSIBLE
 beforeEach(()=>{
-    wrapper = mount(<CommentBox />);
+    wrapper = mount(
+        <Root>
+            <CommentBox />
+        </Root>
+    )
+    ;
 }) //reruns for all tests - even those in describe blocks with their own beforeEach - they are just stacked upon each other
 
-it("shows a text area and a button", ()=> {
+it("shows a text area and a 2 buttons (save comment and fetch comments)", ()=> {
     expect(wrapper.find("textarea").length).toBe(1); //The find method can seatch for both components and plain html
-    expect(wrapper.find("button").length).toBe(1);
+    expect(wrapper.find("button").length).toBe(2);
 });
 
 //Describe function used for common setup and teardown of tests
